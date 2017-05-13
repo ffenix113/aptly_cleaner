@@ -1,0 +1,40 @@
+[repo_info]
+# Reserved for future use?
+aptly_url = 'http://localhost:8081/api'
+
+# User that can operate on Aptly DB
+# User that is in 'aptly' group
+run_user = 'aptly_user'
+
+# List of directories in which to search for packages
+search_dirs = '/var/uploads/', '/var/from_jenkins/'
+
+[repos]
+    [[production]]
+    # Maximum days to live package in repo
+    days_to_live = 60
+
+    # Maximum number of package versions in repository
+    max_packages = 30
+
+    # Higher priority - will be cleaned before lower priority
+    priority = 100
+
+    # If reference_only == True - this repos will not be cleaned
+    # Rather they will be used only as cache
+    #reference_only = True
+
+    # Distribution is needed if it is used in listed repositories.
+    # Defaults to 'wheezy'
+    # Set to empty string if it is not used
+    #distribution = 'wheezy'
+
+    # List of repositories that are grouped by defined status
+    repo_list = 'super-priority-repo',
+
+    [[testing]]
+    days_to_live = 30
+    max_packages = 15
+    priority = 10
+    #distribution = 'wheezy'
+    repo_list = 'testing', wheezy-testing-repo, wheezy-another-testing-repo
